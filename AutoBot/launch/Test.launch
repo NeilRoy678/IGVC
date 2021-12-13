@@ -1,0 +1,6 @@
+<launch>
+    <include file="$(find AutoBot)/launch/simulation.launch">
+        <arg name="world_name" value="$(find AutoBot)/world/Test.world"/>
+    </include>
+
+</launch> 

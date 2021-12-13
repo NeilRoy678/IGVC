@@ -1,0 +1,13 @@
+<launch>
+    <param name="robot_description" command="cat $(find AutoBot)/urdf/AutoBot.urdf" /> 
+    
+    <!-- <param name="robot_description" textfile="AutoBot.urdf" /> -->
+    <arg name="gui" default="False" />
+    <param name="use_gui" value="$(arg gui)"/>
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" required="true" />
+    <node name="rviz" pkg="rviz" type="rviz" args="-d /home/fury/catkin_ws/src/AutoBot/rviz/rviz_conf1.rviz" />
+    <node pkg="AutoBot" name="image_converter" type="image_blob_test.py" output="screen" />
+    <include file="$(find AutoBot)/launch/gazebo.launch" />
+
+</launch>

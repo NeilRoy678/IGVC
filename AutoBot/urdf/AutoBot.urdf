@@ -11,7 +11,7 @@
         xyz="-0.0281176186318505 3.46944695195361E-18 0.0242056021265495"
         rpy="0 0 0" />
       <mass
-        value="455.170796326795" />
+        value="20" />
       <inertia
         ixx="39.3347960457863"
         ixy="2.85952776841653E-16"
@@ -51,7 +51,7 @@
         xyz="5.5511E-17 -0.029868 -1.1102E-16"
         rpy="0 0 0" />
       <mass
-        value="26.146" />
+        value="8" />
       <inertia
         ixx="0.75096"
         ixy="-1.4332E-17"
@@ -104,7 +104,7 @@
         xyz="2.2204E-16 0.029868 -1.1102E-16"
         rpy="0 0 0" />
       <mass
-        value="26.146" />
+        value="8" />
       <inertia
         ixx="0.75096"
         ixy="1.9739E-18"
@@ -588,7 +588,7 @@
 
 <!-- right cam link orientation-->
   <joint name="base_link_to_right_camera" type="fixed">
-    <origin xyz="0.58 -0.5 0.5" rpy="0 0.75 -1.5708" />
+    <origin xyz="0.58 -0.3 0.5" rpy="0 0.75 -1.5708" />
     <parent link="base_link"/>
     <child link="usb_cam_right"/>
   </joint>
@@ -601,7 +601,7 @@
 
 <!-- left cam link orientation-->
   <joint name="base_link_to_left_camera" type="fixed">
-    <origin xyz="0.58 0.5 0.5" rpy="0 0.75 1.5708" />
+    <origin xyz="0.58 0.3 0.5" rpy="0 0.75 1.5708" />
     <parent link="base_link"/>
     <child link="usb_cam_left"/>
   </joint>
@@ -626,9 +626,9 @@
 
   <link name="caster">
     <inertial>
-      <mass value="30.0" />
-      <origin xyz="0 0 0" />
       <mass value="1.0" />
+      <origin xyz="0 0 0" />
+      <mass value="10.0" />
       <inertia  ixx="0.1" ixy="0.0"  ixz="0.0"  iyy="0.1"  iyz="0.0"  izz="0.1" />
     </inertial>
     <visual>
@@ -650,8 +650,8 @@
   </joint>
  
  <gazebo reference="caster">
-    <mu2>0.01</mu2>
-    <mu1>0.01</mu1>
+    <mu2>0.1</mu2>
+    <mu1>0.1</mu1>
   </gazebo>
 
    <gazebo> 

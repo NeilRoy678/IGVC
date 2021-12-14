@@ -588,7 +588,7 @@
 
 <!-- right cam link orientation-->
   <joint name="base_link_to_right_camera" type="fixed">
-    <origin xyz="0.58 -0.3 0.5" rpy="0 0.75 -1.5708" />
+    <origin xyz="0.58 -0.5 0.5" rpy="0 0.75 -1.5708" />
     <parent link="base_link"/>
     <child link="usb_cam_right"/>
   </joint>
@@ -601,7 +601,7 @@
 
 <!-- left cam link orientation-->
   <joint name="base_link_to_left_camera" type="fixed">
-    <origin xyz="0.58 0.3 0.5" rpy="0 0.75 1.5708" />
+    <origin xyz="0.58 0.5 0.5" rpy="0 0.75 1.5708" />
     <parent link="base_link"/>
     <child link="usb_cam_left"/>
   </joint>

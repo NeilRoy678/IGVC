@@ -219,7 +219,9 @@
 
   <link name="optical_cam_center"/>
   <link name="optical_cam_right"/>
-  <link name="optical_cam_left"/>
+  <link name="optical_cam_left"/> 
+  <link name="optical_depth_cam"/>
+  <link name="optical_lidar"/>
 
   <gazebo reference="usb_cam_center">
     <sensor name="center_camera" type="camera">
@@ -489,13 +491,13 @@
         <baseline>0.2</baseline>
         <alwaysOn>true</alwaysOn>
         <updateRate>1.0</updateRate>
-        <cameraName>kinect_cam_ir</cameraName>
-        <imageTopicName>/kinect_cam/color/image_raw</imageTopicName>
-        <cameraInfoTopicName>/kinect_cam/color/camera_info</cameraInfoTopicName>
-        <depthImageTopicName>/kinect_cam/depth/image_raw</depthImageTopicName>
-        <depthImageInfoTopicName>/kinect_cam/depth/camera_info</depthImageInfoTopicName>
-        <pointCloudTopicName>/kinect_cam/depth/points</pointCloudTopicName>
-        <frameName>frame_name</frameName>
+        <cameraName>kinect_cam</cameraName>
+        <imageTopicName>/camera/color/image_raw</imageTopicName>
+        <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+        <depthImageInfoTopicName>/camera/depth/camera_info</depthImageInfoTopicName>
+        <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+        <frameName>optical_depth_cam</frameName>
         <pointCloudCutoff>0.5</pointCloudCutoff>
         <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
         <distortionK1>0.00000001</distortionK1>
@@ -573,6 +575,11 @@
     <parent link="base_link"/>
     <child link="lidar"/>
   </joint>
+  <joint name="optical_lidar_joint" type="fixed">
+    <parent link="lidar"/>
+    <child link="optical_lidar"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
 
 <!-- center cam link orientation-->
   <joint name="base_link_to_center_camera" type="fixed">
@@ -608,14 +615,20 @@
   <joint name="optical_cam_left_joint" type="fixed">
     <parent link="usb_cam_left"/>
     <child link="optical_cam_left"/>
-    <!--origin xyz="0 0 0" rpy="-1.5708-0.5 0 -1.5708"/-->
     <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
-  </joint>
+  </joint> 
 
+  <!-- depth cam link orientation-->
   <joint name="base_link_to_kinect_cam" type="fixed">
-    <origin xyz="0.55 0 0.4" rpy="0 0 0" />
+    <origin xyz="0.55 0 0.8" rpy="0 0.2617 0" />
     <parent link="base_link"/>
     <child link="kinect_cam"/>
+  </joint>
+  <joint name="optical_depth_cam_joint" type="fixed">
+    <parent link="kinect_cam"/>
+    <child link="optical_depth_cam"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+    <!--<origin xyz="0 0 0" rpy="1.5708 0 0"/>-->
   </joint>
 
   <joint name="base_link_to_gps" type="fixed">

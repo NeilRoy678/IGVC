@@ -1,0 +1,679 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- This URDF was automatically created by SolidWorks to URDF Exporter! Originally created by Stephen Brawner (brawner@gmail.com) 
+     Commit Version: 1.6.0-1-g15f4949  Build Version: 1.6.7594.29634
+     For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
+<robot
+  name="AutoBot">
+  <link
+    name="base_link">
+    <inertial>
+      <origin
+        xyz="-0.0281176186318505 3.46944695195361E-18 0.0242056021265495"
+        rpy="0 0 0" />
+      <mass
+        value="20" />
+      <inertia
+        ixx="39.3347960457863"
+        ixy="2.85952776841653E-16"
+        ixz="-8.3846836729522"
+        iyy="84.2765821819787"
+        iyz="5.58570830390226E-15"
+        izz="71.4566092301352" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://AutoBot/meshes/base_link.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.968627450980392 1 0.576470588235294 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://AutoBot/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <link
+    name="base_link_to_Left_wheel">
+    <inertial>
+      <origin
+        xyz="5.5511E-17 -0.029868 -1.1102E-16"
+        rpy="0 0 0" />
+      <mass
+        value="8" />
+      <inertia
+        ixx="0.75096"
+        ixy="-1.4332E-17"
+        ixz="-1.5881E-17"
+        iyy="1.4522"
+        iyz="9.1965E-17"
+        izz="0.75096" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://AutoBot/meshes/base_link_to_Left_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://AutoBot/meshes/base_link_to_Left_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Left_wheel"
+    type="continuous">
+    <origin
+      xyz="0.24475 0.42 -0.2107"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_link_to_Left_wheel" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+  <link
+    name="base_link_to_Right_wheel">
+    <inertial>
+      <origin
+        xyz="2.2204E-16 0.029868 -1.1102E-16"
+        rpy="0 0 0" />
+      <mass
+        value="8" />
+      <inertia
+        ixx="0.75096"
+        ixy="1.9739E-18"
+        ixz="-6.8063E-17"
+        iyy="1.4522"
+        iyz="4.3994E-18"
+        izz="0.75096" />
+    </inertial>
+    <visual>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://AutoBot/meshes/base_link_to_Right_wheel.STL" />
+      </geometry>
+      <material
+        name="">
+        <color
+          rgba="0.79216 0.81961 0.93333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin
+        xyz="0 0 0"
+        rpy="0 0 0" />
+      <geometry>
+        <mesh
+          filename="package://AutoBot/meshes/base_link_to_Right_wheel.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint
+    name="Right_wheel"
+    type="continuous">
+    <origin
+      xyz="0.24475 -0.42 -0.2107"
+      rpy="0 0 0" />
+    <parent
+      link="base_link" />
+    <child
+      link="base_link_to_Right_wheel" />
+    <axis
+      xyz="0 1 0" />
+  </joint>
+
+  <link name="lidar">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <gazebo reference="lidar">
+    <sensor type="ray" name="lidar">
+      <visualize>true</visualize>
+      <update_rate>10</update_rate>
+      <ray>
+        <!-- Use gaussian noise -->
+        <!--
+        <noise>
+        <type>gaussian</type>
+        <mean>0.0</mean>
+        <stddev>0.02</stddev>
+      </noise>
+      -->
+        <scan>
+          <horizontal>
+            <samples>100</samples>
+            <resolution>3.6</resolution>
+            <min_angle>-1.53589</min_angle>
+            <max_angle>1.53589</max_angle>
+          </horizontal>
+        </scan>
+        <range>
+          <min>0.05</min>
+          <max>30</max>
+          <resolution>0.02</resolution>
+        </range>
+      </ray>
+      <plugin name="lidar_plugin" filename="libgazebo_ros_laser.so">
+        <topicName>/scan</topicName>
+        <frameName>/lidar</frameName>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <link name="usb_cam_center">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="usb_cam_right">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="usb_cam_left">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="optical_cam_center"/>
+  <link name="optical_cam_right"/>
+  <link name="optical_cam_left"/> 
+  <link name="optical_depth_cam"/>
+  <link name="optical_lidar"/>
+
+  <gazebo reference="usb_cam_center">
+    <sensor name="center_camera" type="camera">
+        <camera>
+          <!-- <horizontal_fov>1.2290609</horizontal_fov> -->
+          <horizontal_fov>2.239</horizontal_fov>
+          <vertical_fov>1.995</vertical_fov>
+          <image>
+            <width>640</width>
+            <height>512</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <!--
+          <distortion>
+            <k1>-0.25</k1>
+            <k2>0.12</k2>
+            <k3>0.0</k3>
+            <p1>-0.00028</p1>
+            <p2>-0.00005</p2>
+            <center>0.5 0.5</center>
+          </distortion>
+          -->
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+          <cameraName>usb_cam_center</cameraName>
+          <imageTopicName>image_raw_center</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>optical_cam_center</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+  </gazebo>
+
+  <gazebo reference="usb_cam_right">
+    <sensor name="right_camera" type="camera">
+        <camera>
+          <!-- <horizontal_fov>1.2290609</horizontal_fov> -->
+          <horizontal_fov>2.239</horizontal_fov>
+          <vertical_fov>1.995</vertical_fov>
+          <image>
+            <width>640</width>
+            <height>512</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <!--
+          <distortion>
+            <k1>-0.25</k1>
+            <k2>0.12</k2>
+            <k3>0.0</k3>
+            <p1>-0.00028</p1>
+            <p2>-0.00005</p2>
+            <center>0.5 0.5</center>
+          </distortion>
+          -->
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+          <cameraName>usb_cam_right</cameraName>
+          <imageTopicName>image_raw_right</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>optical_cam_right</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+  </gazebo>
+
+  <gazebo reference="usb_cam_left">
+    <sensor name="left_camera" type="camera">
+        <camera>
+          <!-- <horizontal_fov>1.2290609</horizontal_fov> -->
+          <horizontal_fov>2.239</horizontal_fov>
+          <vertical_fov>1.995</vertical_fov>
+          <image>
+            <width>640</width>
+            <height>512</height>
+          </image>
+          <clip>
+            <near>0.1</near>
+            <far>100</far>
+          </clip>
+          <!--
+          <distortion>
+            <k1>-0.25</k1>
+            <k2>0.12</k2>
+            <k3>0.0</k3>
+            <p1>-0.00028</p1>
+            <p2>-0.00005</p2>
+            <center>0.5 0.5</center>
+          </distortion>
+          -->
+        </camera>
+        <always_on>1</always_on>
+        <update_rate>30</update_rate>
+        <plugin name="camera_controller" filename="libgazebo_ros_camera.so">
+          <alwaysOn>true</alwaysOn>
+          <updateRate>30.0</updateRate>
+          <cameraName>usb_cam_left</cameraName>
+          <imageTopicName>image_raw_left</imageTopicName>
+          <cameraInfoTopicName>camera_info</cameraInfoTopicName>
+          <frameName>optical_cam_left</frameName>
+          <hackBaseline>0.0</hackBaseline>
+          <distortionK1>0.0</distortionK1>
+          <distortionK2>0.0</distortionK2>
+          <distortionK3>0.0</distortionK3>
+          <distortionT1>0.0</distortionT1>
+          <distortionT2>0.0</distortionT2>
+        </plugin>
+      </sensor>
+  </gazebo>
+
+  <link name="imu">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="magnetometer">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="kinect_cam">
+    <visual>
+      <geometry>
+        <box size="0.1 0.1 0.05"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <link name="gps">
+    <visual>
+      <geometry>
+        <cylinder length="0.05" radius="0.1"/>
+      </geometry>
+    </visual>
+  </link>
+
+  <gazebo>
+
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotSimType>gazebo_ros_control/DefaultRobotHWSim</robotSimType>
+    </plugin>
+
+    <plugin filename="libhector_gazebo_ros_imu.so" name="imu">
+      <serviceName>/imu/calibrate</serviceName>
+      <updateRate>200.0</updateRate>
+      <bodyName>imu</bodyName>
+      <frameId>imu</frameId>
+      <topicName>/imu</topicName>
+      <rpyOffset>0 0 0</rpyOffset>
+      <xyzOffset>0 0 0</xyzOffset>
+      <gaussianNoise>0.00000001</gaussianNoise>
+      <accelDrift>0.00000001 0.00000001 0.00000001</accelDrift>
+      <accelDriftFrequency>0.00000001 0.00000001 0.00000001</accelDriftFrequency>
+      <accelGaussianNoise>0.00000001 0.00000001 0.00000001</accelGaussianNoise>
+      <rateDrift>0.0 0.0 0.0</rateDrift>
+      <rateDriftFrequency>0.0 0.0 0.0</rateDriftFrequency>
+      <rateGaussianNoise>0.0 0.0 0.0</rateGaussianNoise>
+      <headingDrift>0.0 0.0 0.0</headingDrift>
+      <headingDriftFrequency>0.0 0.0 0.0</headingDriftFrequency>
+      <headingGaussianNoise>0.0 0.0 0.0</headingGaussianNoise>
+      <yawOffset>1.5707963</yawOffset>
+    </plugin>
+    <plugin filename="libhector_gazebo_ros_imu.so" name="magnetometer">
+      <serviceName>/magnetometer/calibrate</serviceName>
+      <updateRate>200.0</updateRate>
+      <bodyName>magnetometer</bodyName>
+      <frameId>magnetometer</frameId>
+      <topicName>/magnetometer</topicName>
+      <rpyOffset>0 0 0</rpyOffset>
+      <xyzOffset>0 0 0</xyzOffset>
+      <gaussianNoise>0.00000001</gaussianNoise>
+      <accelDrift>0.00000001 0.00000001 0.00000001</accelDrift>
+      <accelDriftFrequency>0.00000001 0.00000001 0.00000001</accelDriftFrequency>
+      <accelGaussianNoise>0.00000001 0.00000001 0.00000001</accelGaussianNoise>
+      <rateDrift>0.0 0.0 0.0</rateDrift>
+      <rateDriftFrequency>0.0 0.0 0.0</rateDriftFrequency>
+      <rateGaussianNoise>0.0 0.0 0.0</rateGaussianNoise>
+      <headingDrift>0.0 0.0 0.0</headingDrift>
+      <headingDriftFrequency>0.0 0.0 0.0</headingDriftFrequency>
+      <headingGaussianNoise>0.0 0.0 0.0</headingGaussianNoise>
+      <yawOffset>0</yawOffset>
+    </plugin>
+
+    <plugin filename="libhector_gazebo_ros_gps.so" name="gps">
+      <updateRate>20.0</updateRate>
+      <bodyName>base_link</bodyName>
+      <frameId>base_link</frameId>
+      <topicName>/fix</topicName>
+      <velocityTopicName>/fix_velocity</velocityTopicName>
+      <referenceLatitude>33.774497</referenceLatitude>
+      <referenceLongitude>-84.405001</referenceLongitude>
+      <referenceAltitude>309.0</referenceAltitude>
+      <drift>0.001 0.001 0.001</drift>
+      <gaussianNoise>0.0001 0.0001 0.0001</gaussianNoise>
+      <velocityDrift>0 0 0</velocityDrift>
+      <velocityGaussianNoise>0.005 0.005 0.05</velocityGaussianNoise>
+    </plugin>
+
+    <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+      <updateRate>50</updateRate>
+      <leftJoint>Left_wheel</leftJoint>
+      <rightJoint>Right_wheel</rightJoint>
+      <wheelSeparation>0.8</wheelSeparation>
+      <wheelDiameter>0.31</wheelDiameter>
+      <wheelAcceleration>1.0</wheelAcceleration>
+      <wheelTorque>20</wheelTorque>
+      <commandTopic>cmd_vel</commandTopic>
+      <odometryTopic>odom</odometryTopic>
+      <odometryFrame>odom</odometryFrame>
+      <robotBaseFrame>base_link</robotBaseFrame>
+      
+      <odometrySource>1</odometrySource>
+      <publishWheelTF>true</publishWheelTF>
+      <publishOdom>true</publishOdom>
+      <publishWheelJointState>true</publishWheelJointState>
+      
+      <legacyMode>false</legacyMode>
+    </plugin> 
+  
+  </gazebo>
+
+  <gazebo reference="kinect_cam">
+    <sensor name="depth_camera" type="depth">
+      <update_rate>30</update_rate>
+      <camera>
+        <horizontal_fov>1.047198</horizontal_fov>
+        <image>
+          <width>640</width>
+          <height>480</height>
+          <format>R8G8B8</format>
+        </image>
+        <clip>
+          <near>0.05</near>
+          <far>5</far>
+        </clip>
+      </camera>
+      <plugin name="kinect_cam_controller" filename="libgazebo_ros_openni_kinect.so">
+        <baseline>0.2</baseline>
+        <alwaysOn>true</alwaysOn>
+        <updateRate>1.0</updateRate>
+        <cameraName>kinect_cam</cameraName>
+        <imageTopicName>/camera/color/image_raw</imageTopicName>
+        <cameraInfoTopicName>/camera/color/camera_info</cameraInfoTopicName>
+        <depthImageTopicName>/camera/depth/image_raw</depthImageTopicName>
+        <depthImageInfoTopicName>/camera/depth/camera_info</depthImageInfoTopicName>
+        <pointCloudTopicName>/camera/depth/points</pointCloudTopicName>
+        <frameName>optical_depth_cam</frameName>
+        <pointCloudCutoff>0.5</pointCloudCutoff>
+        <pointCloudCutoffMax>3.0</pointCloudCutoffMax>
+        <distortionK1>0.00000001</distortionK1>
+        <distortionK2>0.00000001</distortionK2>
+        <distortionK3>0.00000001</distortionK3>
+        <distortionT1>0.00000001</distortionT1>
+        <distortionT2>0.00000001</distortionT2>
+        <CxPrime>0</CxPrime>
+        <Cx>0</Cx>
+        <Cy>0</Cy>
+        <focalLength>0</focalLength>
+        <hackBaseline>0</hackBaseline>
+      </plugin>
+    </sensor>
+  </gazebo>
+
+  <transmission name="trans_left_wheel">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Left_wheel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+
+  <transmission name="trans_right_wheel">
+    <type>transmission_interface/SimpleTransmission</type>
+    <joint name="Right_wheel">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+    </joint>
+    <actuator name="motor1">
+      <hardwareInterface>hardware_interface/EffortJointInterface</hardwareInterface>
+      <mechanicalReduction>1</mechanicalReduction>
+    </actuator>
+  </transmission>
+  
+  <gazebo reference="base_link">
+    <material>Gazebo/Grey</material>
+    <mu1>0.2</mu1>
+    <mu2>0.2</mu2>
+  </gazebo>
+
+  <gazebo reference="Left_wheel">
+    <material>Gazebo/Grey</material>
+    <mu1>0.4</mu1>
+    <mu2>0.4</mu2>
+  </gazebo>
+
+  <gazebo reference="Right_wheel">
+    <material>Gazebo/Grey</material>
+    <mu1>0.4</mu1>
+    <mu2>0.4</mu2>
+  </gazebo>
+
+
+  <joint name="base_link_to_imu" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu"/>
+    <origin xyz=" 0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+  <joint name="base_link_to_magnetometer" type="fixed">
+    <parent link="base_link"/>
+    <child link="magnetometer"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 0"/>
+  </joint>
+
+
+  <joint name="base_link_to_lidar" type="fixed">
+    <origin xyz="0.6 0 0" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="lidar"/>
+  </joint>
+  <joint name="optical_lidar_joint" type="fixed">
+    <parent link="lidar"/>
+    <child link="optical_lidar"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+  </joint>
+
+<!-- center cam link orientation-->
+  <joint name="base_link_to_center_camera" type="fixed">
+    <origin xyz="0.58 0 0.5" rpy="0 0 0" />
+    <parent link="base_link"/>
+    <child link="usb_cam_center"/>
+  </joint>
+  <joint name="optical_cam_center_joint" type="fixed">
+    <parent link="usb_cam_center"/>
+    <child link="optical_cam_center"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint>
+
+<!-- right cam link orientation-->
+  <joint name="base_link_to_right_camera" type="fixed">
+    <origin xyz="0.58 -0.5 0.5" rpy="0 0.75 -1.5708" />
+    <parent link="base_link"/>
+    <child link="usb_cam_right"/>
+  </joint>
+  <joint name="optical_cam_right_joint" type="fixed">
+    <parent link="usb_cam_right"/>
+    <child link="optical_cam_right"/>
+    <!--origin xyz="0 0 0" rpy="-1.5708-0.5 0 -1.5708"/-->
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint>
+
+<!-- left cam link orientation-->
+  <joint name="base_link_to_left_camera" type="fixed">
+    <origin xyz="0.58 0.5 0.5" rpy="0 0.75 1.5708" />
+    <parent link="base_link"/>
+    <child link="usb_cam_left"/>
+  </joint>
+  <joint name="optical_cam_left_joint" type="fixed">
+    <parent link="usb_cam_left"/>
+    <child link="optical_cam_left"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+  </joint> 
+
+  <!-- depth cam link orientation-->
+  <joint name="base_link_to_kinect_cam" type="fixed">
+    <origin xyz="0.55 0 0.8" rpy="0 0.2617 0" />
+    <parent link="base_link"/>
+    <child link="kinect_cam"/>
+  </joint>
+  <joint name="optical_depth_cam_joint" type="fixed">
+    <parent link="kinect_cam"/>
+    <child link="optical_depth_cam"/>
+    <origin xyz="0 0 0" rpy="-1.5708 0 -1.5708"/>
+    <!--<origin xyz="0 0 0" rpy="1.5708 0 0"/>-->
+  </joint>
+
+  <joint name="base_link_to_gps" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0" /> <!-- -1.5708 -->
+    <parent link="base_link"/>
+    <child link="gps"/>
+  </joint>
+
+  <link name="caster">
+    <inertial>
+      <mass value="1.0" />
+      <origin xyz="0 0 0" />
+      <mass value="10.0" />
+      <inertia  ixx="0.1" ixy="0.0"  ixz="0.0"  iyy="0.1"  iyz="0.0"  izz="0.1" />
+    </inertial>
+    <visual>
+      <geometry>
+        <sphere radius="0.09"/>
+      </geometry>
+    </visual>
+    <collision>
+      <geometry>
+        <sphere radius="0.09"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <joint name="base_link_to_caster" type="fixed">
+    <parent link="base_link"/>
+    <child link="caster"/>
+    <origin xyz="-0.45 0.0 -0.39" rpy="0 0 0" />
+  </joint>
+ 
+ <gazebo reference="caster">
+    <mu2>0.1</mu2>
+    <mu1>0.1</mu1>
+  </gazebo>
+
+   <gazebo> 
+    <joint name='base_link_to_caster' type='ball'>
+      <parent>base_link</parent>
+      <child>caster</child>
+      <pose frame=''>0 0 0 0 0 0</pose>
+     
+    </joint>
+  </gazebo> 
+
+</robot>

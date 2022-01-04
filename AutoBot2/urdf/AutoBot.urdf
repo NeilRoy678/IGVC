@@ -544,14 +544,14 @@
 
   <gazebo reference="Left_wheel">
     <material>Gazebo/Grey</material>
-    <mu1>0.4</mu1>
-    <mu2>0.4</mu2>
+    <mu1>0.7</mu1>
+    <mu2>0.75</mu2>
   </gazebo>
 
   <gazebo reference="Right_wheel">
     <material>Gazebo/Grey</material>
-    <mu1>0.4</mu1>
-    <mu2>0.4</mu2>
+    <mu1>0.7</mu1>
+    <mu2>0.75</mu2>
   </gazebo>
 
 

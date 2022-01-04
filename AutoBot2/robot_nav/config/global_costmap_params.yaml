@@ -1,6 +1,17 @@
 global_costmap:
   global_frame: odom
   robot_base_frame: base_link
-  update_frequency: 5.0
+  #plugins:
+       # - {name: traversability_layer, type: "traversability_layer::TraversabilityLayer"}
+        #- {name: line_layer,     type: "line_layer::LineLayer"}
+  width: 200
+  height: 200
+  origin_x: -100
+  origin_y: -100
+  update_frequency: 10
   static_map: false
   rolling_window: true
+
+
+
+  

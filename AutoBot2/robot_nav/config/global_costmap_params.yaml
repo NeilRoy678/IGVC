@@ -9,6 +9,7 @@ global_costmap:
   origin_x: -100
   origin_y: -100
   update_frequency: 10
+  publish_frequency: 10
   static_map: false
   rolling_window: true
 

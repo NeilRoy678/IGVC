@@ -9,24 +9,26 @@ from cv_bridge import CvBridge, CvBridgeError
 from sensor_msgs.msg import Image
 from nav_msgs.msg import OccupancyGrid
 import tf
+from math import pi
 
 bridge = CvBridge()
 
 class Gridmap:
     def __init__(self):
         #rospy.init_node('RosGridMapping', anonymous=True)
-        self.sensor_model_p_occ   = rospy.get_param('~sensor_model_p_occ', 0.75)
-        self.sensor_model_p_free  = rospy.get_param('~sensor_model_p_free', 0.45)
-        self.sensor_model_p_prior = rospy.get_param('~sensor_model_p_prior', 0.5)
         self.robot_frame          = rospy.get_param('~robot_frame', 'base_link')
-        self.map_frame            = rospy.get_param('~map_frame', 'map')
-        self.map_center_x         = rospy.get_param('~map_center_x', -1.0)
-        self.map_center_y         = rospy.get_param('~map_center_y', -1.0)
+        self.map_frame            = rospy.get_param('~map_frame', 'odom')
+        self.map_center_x         = rospy.get_param('~map_center_x', 1.0)
+        self.map_center_y         = rospy.get_param('~map_center_y', 3.2)
+        self.map_orientation_x         = rospy.get_param('~map_orientation_x', 0.0)
+        self.map_orientation_y         = rospy.get_param('~map_orientation_y', 0.0)
+        self.map_orientation_z         = rospy.get_param('~map_orientation_z', -1.0)
+        self.map_orientation_w         = rospy.get_param('~map_orientation_w', 1.0)
         # img size 640,700
-        self.map_size_x           = rospy.get_param('~map_size_x', 6.4)
+        self.map_size_x           = rospy.get_param('~map_size_x', 6.0)
         self.map_size_y           = rospy.get_param('~map_size_y', 7.0)
-        self.map_resolution       = rospy.get_param('~map_resolution', 0.01)
-        self.map_publish_freq     = rospy.get_param('~map_publish_freq', 1.0)
+        self.map_resolution       = rospy.get_param('~map_resolution', 0.02)
+        self.map_publish_freq     = rospy.get_param('~map_publish_freq', 10.0)
         self.update_movement      = rospy.get_param('~update_movement', 0.1)
 
         # Creata a OccupancyGrid message template
@@ -37,6 +39,10 @@ class Gridmap:
         self.map_msg.info.height = int(self.map_size_y / self.map_resolution)
         self.map_msg.info.origin.position.x = self.map_center_x
         self.map_msg.info.origin.position.y = self.map_center_y
+        self.map_msg.info.origin.orientation.x = self.map_orientation_x
+        self.map_msg.info.origin.orientation.y = self.map_orientation_y
+        self.map_msg.info.origin.orientation.z = self.map_orientation_z
+        self.map_msg.info.origin.orientation.w = self.map_orientation_w
 
         self.map_pub = rospy.Publisher('lane_map', OccupancyGrid, queue_size=2)
 
@@ -56,7 +62,11 @@ class Gridmap:
 
         # Publish map
         self.map_msg.data = gridmap_int8
+        current_time = rospy.Time.now()
         #self.map_msg.header.stamp = stamp
+        self.map_msg.header.stamp = current_time
+        #self.tf_sub.waitForTransform(self.map_frame, self.robot_frame, self.map_msg.header.stamp, rospy.Duration(1.0))
+
         self.map_pub.publish(self.map_msg)
         rospy.loginfo_once("Published map!")
 
@@ -143,19 +153,20 @@ def image_callback(ros_image):
     for (x, y) in pts:
        cv2.circle(image, (x, y), 5, (0, 255, 0), -1)
 
-    warped = cv2.resize(warped, (640, 700))
+    warped = cv2.resize(warped, (300, 350))
     filt_warped,_ = detect_lane_in_a_frame(warped)
 
     grid_obj = Gridmap()
+    
     map_publisher = grid_obj.publish_occupancygrid(filt_warped)
 
 
     #image publisher
 
     cv2.imshow("Warped Image window", warped)
-    cv2.imshow("Masked Warped Image window", filt_warped)
-    cv2.imshow("Image window", image)
-    cv2.waitKey(3)
+    #cv2.imshow("Masked Warped Image window", filt_warped)
+    #cv2.imshow("Image window", image)
+    cv2.waitKey(1)
 
 def main(args):
   #print("test1")

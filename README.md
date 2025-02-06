@@ -1,20 +1,24 @@
-The Intelligent Ground Vehicle Competition (IGVC) project was designed as part of a university team project where we developed an autonomous vehicle capable of navigating and responding to dynamic environments. The vehicle was tasked with performing lane detection, pothole detection, and lane adjustments, all integrated into a robust autonomous system using ROS (Robot Operating System).
-Project Highlights
+# Intelligent Ground Vehicle Competition (IGVC) Project
 
-    Vision Algorithms for Lane Detection: Developed advanced vision algorithms, including inverse perspective mapping, to detect lanes on the road. These algorithms enabled the vehicle to perceive and track the lane markings, providing accurate positioning for the vehicle's path.
+## Overview
+This project was developed for the **Intelligent Ground Vehicle Competition (IGVC)**, where we built an autonomous ground vehicle capable of navigating dynamic environments with automated lane detection, pothole avoidance, and lane adjustments. The system was developed using **Robot Operating System (ROS)**, computer vision, machine learning, and control algorithms.
 
-    Automated Lane Adjustment: Integrated the lane detection system with a PID controller to automate lane adjustments. This allowed the vehicle to follow the path accurately without requiring manual intervention.
+## Key Features
 
-    Pothole Detection using Machine Learning: Implemented a machine learning model for pothole detection, which was simulated and tested within ROS. The system was trained to recognize road anomalies and make decisions on how to avoid or navigate over them safely.
+- **Lane Detection & Adjustment**: 
+  - Developed vision algorithms, including **Inverse Perspective Mapping**, to detect road lanes.
+  - Integrated a **PID controller** for automated lane adjustment, enabling the vehicle to follow the path without manual intervention.
 
-    Cost Reduction through Sensor Integration: Optimized the vehicle by replacing the conventional LiDAR sensors with vision-based algorithms, such as Gaussian Potential Field, for obstacle detection. This significantly reduced the overall project cost while maintaining high accuracy.
+- **Pothole Detection**: 
+  - Implemented a machine learning model to detect potholes using camera feeds.
+  - The system was trained and simulated in ROS, allowing the vehicle to detect and avoid potholes autonomously.
 
-Key Technologies
+- **Cost Optimization**: 
+  - Replaced expensive LiDAR sensors with **vision-based algorithms** like **Gaussian Potential Field** for obstacle detection, significantly reducing project costs while maintaining accuracy.
 
-    Robot Operating System (ROS): ROS provided the framework for integrating various subsystems and algorithms, including vision processing, control, and sensor data handling.
+## Technologies Used
 
-    Computer Vision: Utilized computer vision techniques, including inverse perspective mapping, for lane detection and obstacle avoidance.
-
-    Machine Learning: Implemented machine learning for pothole detection to enhance the vehicle's ability to understand and respond to real-world environments.
-
-    PID Control: The PID control algorithm was used to adjust the vehicle's path, maintaining it within the designated lane.
+- **Robot Operating System (ROS)**: Framework for integrating subsystems and algorithms.
+- **Computer Vision**: Techniques like inverse perspective mapping for lane detection and Gaussian Potential Field for obstacle avoidance.
+- **Machine Learning**: Trained model for pothole detection and avoidance.
+- **PID Control**: Used for automated lane following and path adjustment.

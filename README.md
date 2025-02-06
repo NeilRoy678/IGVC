@@ -22,3 +22,5 @@ This project was developed for the **Intelligent Ground Vehicle Competition (IGV
 - **Computer Vision**: Techniques like inverse perspective mapping for lane detection and Gaussian Potential Field for obstacle avoidance.
 - **Machine Learning**: Trained model for pothole detection and avoidance.
 - **PID Control**: Used for automated lane following and path adjustment.
+
+- https://user-images.githubusercontent.com/74729526/197328961-532bbfe1-5323-418d-87ef-c90a70f1567d.mp4

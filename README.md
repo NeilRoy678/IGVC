@@ -19,7 +19,7 @@ This project was developed for the **Intelligent Ground Vehicle Competition (IGV
 ## Technologies Used
 
 - **Robot Operating System (ROS)**: Framework for integrating subsystems and algorithms.
-- **Computer Vision**: Techniques like inverse perspective mapping for lane detection and Cost Map for obstacle avoidance.
+- **Computer Vision**: Tested Techniques like inverse perspective mapping for lane detection and Cost Map/Gaussian Potential Feild for obstacle avoidance.
 - **Machine Learning**: Trained model for pothole detection and avoidance.
 - **PID Control**: Used for automated lane following and path adjustment.
 

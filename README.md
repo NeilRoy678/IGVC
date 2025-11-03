@@ -24,3 +24,8 @@ This project was developed for the **Intelligent Ground Vehicle Competition (IGV
 - **PID Control**: Used for automated lane following and path adjustment.
 
 https://user-images.githubusercontent.com/74729526/197328961-532bbfe1-5323-418d-87ef-c90a70f1567d.mp4
+
+
+https://github.com/user-attachments/assets/d9dd5125-ef70-4bf5-b15e-4ad036388d5c
+
+![unknown](https://github.com/user-attachments/assets/80b189db-62f0-425a-8ea7-42b899ea57f6)
